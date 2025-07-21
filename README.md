@@ -1,4 +1,4 @@
-# React Ardublockly
+# QOOOL Blockly Fork
 
 <div align="center"> 
 <img src="/src/components/sensebox_logo.svg?raw=true" height="128" alt="senseBox Logo"/>
