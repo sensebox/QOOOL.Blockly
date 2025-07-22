@@ -1,16 +1,21 @@
 import Interpreter from "js-interpreter";
-import { START_SIMULATOR, STOP_SIMULATOR, NEW_CODE } from "../actions/types";
+import {
+  START_SIMULATOR,
+  STOP_SIMULATOR,
+  NEW_CODE,
+  SET_MODULE_VALUE,
+} from "../actions/types";
 import initSimulator from "../components/Simulator/init";
 
 const initialState = {
   code: "",
   modules: [],
+  moduleValues: {},
   isRunning: false,
   interpreter: null,
-  simulationStartTimestamp: null, // Timestamp when the simulation starts
-  abortController: null, // Added for abort control
+  simulationStartTimestamp: null,
+  abortController: null,
 };
-
 function runInterpreter(interpreter, abortSignal) {
   return new Promise((resolve, reject) => {
     const nextStep = () => {
@@ -53,10 +58,20 @@ export default function simulatorReducer(state = initialState, action) {
         modules = modulesString
           .split(",")
           .map((module) => module.trim())
-          .filter((m) => m.length > 0);
+          .filter((m) => m.length > 0)
+          .map((type, index) => ({
+            id: `m_${index}`,
+            type,
+          }));
       } else {
         console.log("No modules comment found.");
       }
+
+      // Initialisiere Werte separat
+      const moduleValues = {};
+      modules.forEach((mod) => {
+        moduleValues[mod.type] = null;
+      });
 
       if (state.isRunning) {
         state.abortController.abort();
@@ -65,10 +80,11 @@ export default function simulatorReducer(state = initialState, action) {
       return {
         ...state,
         code: action.payload.simulator,
-        modules: modules,
+        modules,
+        moduleValues,
         interpreter: newInterpreter,
         simulationStartTimestamp: null,
-        abortController: null, // Reset abortController
+        abortController: null,
         isRunning: false,
       };
     }
@@ -111,6 +127,17 @@ export default function simulatorReducer(state = initialState, action) {
         abortController: null, // Clear the controller
       };
     }
+    case SET_MODULE_VALUE: {
+      const { type, value } = action.payload;
+      return {
+        ...state,
+        moduleValues: {
+          ...state.moduleValues,
+          [type]: value,
+        },
+      };
+    }
+
     default:
       return state;
   }

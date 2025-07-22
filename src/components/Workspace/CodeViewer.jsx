@@ -11,7 +11,8 @@ import {
 import MonacoEditor from "@monaco-editor/react";
 import * as Blockly from "blockly";
 import Simulator from "../Simulator";
-import DebugViewer from "../DebugViewer";
+import DebugViewer from "./DebugViewer";
+import GraphViewer from "./GraphViewer";
 
 const Accordion = styled(MuiAccordion)(({ theme }) => ({
   border: `1px solid ${theme.palette.secondary.main}`,
@@ -72,7 +73,7 @@ const CodeViewer = () => {
         </AccordionSummary>
         <AccordionDetails
           sx={{
-            height: "calc(50vh - 50px - 55px)",
+            height: "calc(50vh - 50px - 55px )",
             bgcolor: "background.paper",
           }}
         >
@@ -99,7 +100,7 @@ const CodeViewer = () => {
         </AccordionSummary>
         <AccordionDetails
           sx={{
-            height: "calc(50vh - 50px - 50px)",
+            height: "calc(50vh - 50px - 50px )",
             bgcolor: "background.paper",
           }}
         >
