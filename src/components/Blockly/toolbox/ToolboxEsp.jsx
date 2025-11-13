@@ -20,7 +20,6 @@ export const ToolboxEsp = () => {
         <Block type="sensebox_esp32s2_accelerometer" />
         <Block type="sensebox_sensor_sds011" />
         <Block type="sensebox_sensor_sps30" />
-        <Block type="sensebox_sensor_pressure" />
         <Block type="sensebox_sensor_dps310" />
         <Block type="sensebox_sensor_bme680_bsec" />
         <Block type="sensebox_scd30" />
@@ -421,10 +420,6 @@ export const ToolboxEsp = () => {
           <Block type="sensebox_phyphox_sendchannel"></Block>
         </Category>
       </Category>
-      <Category id="QOOOL" name="QOOOL" colour={"#c67d3f"}>
-        <Block type="sensebox_fluoroASM_init"></Block>
-        <Block type="sensebox_fluoroASM_setLED"></Block>
-      </Category>
       <Category id="QOOOL" name="QOOOL" colour={"#b7b645"}>
         <Block type="sensebox_fluoroASM_init"></Block>
         <Block type="sensebox_fluoroASM_setLED">
@@ -439,6 +434,7 @@ export const ToolboxEsp = () => {
         <Block type="sensebox_solar_charger_SB041">
           <Field name="value">battery_level</Field>
         </Block>
+
         <Block type="sensebox_solar_ensure_wake_time">
           <Field name="wake_time">30</Field>
           <Field name="time_scale"> * 1000</Field>
